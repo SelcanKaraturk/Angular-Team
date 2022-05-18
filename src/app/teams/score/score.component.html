@@ -54,16 +54,24 @@
             {{item.name}} <span *ngIf="item.puan">score: {{item.puan}}</span>
           </p>
         </div>
-        <button class="btn btn-success btn-sm" (click)="getSecondMatchScore()">Maç Skorları</button>
+        <button class="btn btn-success btn-sm" *ngIf="seventhGroup.length===0" (click)="getSecondMatchScore()">Maç Skorları</button>
       </div>
       <div class="row mt-4 mb-4" *ngIf="seventhGroup.length>0">
-        <h3 class="text-center">Üçüncü Grup Maçları</h3>
+      <h3 class="text-center">Üçüncü Grup Maçları</h3>
+      <div class="col-12 text-center p-3">
+        <p class="m-0" *ngFor="let item of seventhGroup; let i = index">
+          {{item.name}} <span *ngIf="item.puan">score: {{item.puan}}</span>
+        </p>
+      </div>
+      <button class="btn btn-success btn-sm" *ngIf="!theWinner" (click)="getThirdMatchScore()">Maç Skorları</button>
+    </div>
+      <div class="row mt-4 mb-4" *ngIf="theWinner">
+        <h3 class="text-center">-------Lig Birincisi-----------</h3>
         <div class="col-12 text-center p-3">
-          <p class="m-0" *ngFor="let item of seventhGroup; let i = index">
-            {{item.name}} <span *ngIf="item.puan">score: {{item.puan}}</span>
+          <p class="m-0">
+            {{theWinner.name}}
           </p>
         </div>
-        <button class="btn btn-success btn-sm" (click)="getThirdMatchScore()">Maç Skorları</button>
       </div>
     </div>
   </div>

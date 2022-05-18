@@ -20,6 +20,7 @@ export class ScoreComponent implements OnInit {
   score: any = [];
   secondMatchTeams: any = [];
   buttonDisabled: boolean = false;
+  theWinner: any;
 
   constructor(private data: DataService) {
   }
@@ -172,11 +173,20 @@ export class ScoreComponent implements OnInit {
     this.seventhGroup = this.sortingScore(this.Score(this.seventhGroup));
     this.secondMatchTeams=[];
     this.SecondMatch(this.seventhGroup);//iki grup veya 3 grup gelir
-    if (this.secondMatchTeams.length==2){
+    let value:any=[];
+    this.secondMatchTeams.forEach((val:any,key:any)=>{
+       value.push(this.seventhGroup.find((i: any) => i.name == val.name));
+    });
 
+    if (value[0].puan>value[1].puan){
+      this.theWinner=value[0];
+    }else{
+      if (value[0].totalScore>value[1].totalScore){
+        this.theWinner=value[0];
+      }else{
+        this.theWinner=value[1];
+      }
     }
-    console.log(this.seventhGroup)
-    console.log(this.secondMatchTeams)
   }
 
   sortingScore(name: any) {
